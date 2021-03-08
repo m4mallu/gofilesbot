@@ -1,0 +1,26 @@
+{
+  "name": "GoFilesBot",
+  "description": "Telegram's best Open Source ALL-In-One Multi Purpose RoBot. Create your Fork now.",
+  "keywords": ["telegram", "best", "filter", "bot"],
+  "website": "https://github.com/m4mallu/gofilesbot",
+  "repository": "https://github.com/m4mallu/gofilesbot",
+  "env": {
+        "APP_ID": {"description": "Get this value from https://my.telegram.org", "required": true},
+        "API_HASH": {"description": "Get this value from https://my.telegram.org" , "required": true},
+        "TG_BOT_TOKEN": {"description": "Get Bot Token From BotFather Bot","required": true},
+        "AUTH_USERS": {"description": "List of userIDs separated by <space>","required": true},
+        "CHANNELS": {"description": "List of Channel IDs separated by <space>","required": true},
+        "TG_USER_SESSION": {"description": "String Session from an admin user","required": true},
+        "ENV": {"description": "Set this to ANYTHING","value": "ANYTHING"}
+  },
+  "buildpacks": [
+    {"url": "heroku/python"}
+  ],
+  "formation": {
+    "worker": {
+      "quantity": 4,
+      "size": "free"
+    }
+  },
+  "stack": "heroku-20"
+}
