@@ -23,7 +23,7 @@ AUTH_USERS      - List of Autherized user ids separated by <space>
 
 ## 💠 @BotFather Command:
 ```
-/clanchat - Delete all the messages in Group
+/cleanchat - Delete all the messages in Group
 ```
 
 ## 💠 Deploy:
@@ -55,8 +55,9 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
-## 💠 [LICENSE](https://choosealicense.com/licenses/gpl-3.0/)
-- GPLv3
+## 💠 LICENSE
+
+- [GPLv3](https://choosealicense.com/licenses/gpl-3.0/)
 
 ## 💠 Credits:
 
