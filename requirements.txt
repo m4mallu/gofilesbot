@@ -1,2 +1,4 @@
 Pyrogram==1.1.9
+hurry.filesize
 TgCrypto
+
