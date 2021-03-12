@@ -10,7 +10,7 @@ from base64 import b64decode
 from hurry.filesize import size
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait
-from pyrogram import Client, filters, StopPropagation
+from pyrogram import Client, filters
 
 if os.environ.get("ENV", False):
     from sample_config import Config
@@ -25,10 +25,10 @@ async def bot_pm(client: Bot, message: Message):
             chat_id=message.chat.id,
             text=Presets.WELCOME_TEXT.format(message.from_user.first_name)
         )
-        raise StopPropagation
-    query_message = message.text.split(" ")[-1]
-    query_bytes = query_message.encode("ascii")
+        return
     try:
+        query_message = message.text.split(" ")[-1]
+        query_bytes = query_message.encode("ascii")
         base64_bytes = b64decode(query_bytes)
         secret_query = base64_bytes.decode("ascii")
     except Exception:
