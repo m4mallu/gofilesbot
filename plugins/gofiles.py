@@ -7,6 +7,7 @@ import time
 from bot import Bot
 from presets import Presets
 from base64 import b64encode
+from init import user_message
 from hurry.filesize import size
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
@@ -24,6 +25,7 @@ async def query_mgs(client: Bot, message: Message):
         return
     query_message = message.text
     info = await client.get_me()
+    user_message.clear()
     if len(message.text) > 2:
         try:
             for channel in Config.CHANNELS:
@@ -65,6 +67,7 @@ async def query_mgs(client: Bot, message: Message):
                             )
                         except FloodWait as e:
                             time.sleep(e.x)
+                        user_message[id] = message.message_id
                 # Looking for video type in messages
                 async for messages in client.USER.search_messages(channel, query_message, filter="video"):
                     vid_file_names = messages.caption
@@ -101,5 +104,41 @@ async def query_mgs(client: Bot, message: Message):
                             )
                         except FloodWait as e:
                             time.sleep(e.x)
+                        user_message[id] = message.message_id
         except Exception:
+            try:
+                await client.send_message(
+                    chat_id=message.chat.id,
+                    text=Presets.PM_ERROR,
+                    reply_to_message_id=message.message_id
+                )
+            except Exception:
+                pass
             return
+        if user_message.keys():
+            try:
+                await client.send_message(
+                    chat_id=message.chat.id,
+                    text=Presets.MEDIA_SEND_TEXT,
+                    reply_to_message_id=user_message[id],
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [InlineKeyboardButton(
+                                "👉 Click Here To View 👈", url="t.me/{}".format(info.username))
+                             ]
+                        ])
+                )
+                user_message.clear()
+            except Exception:
+                pass
+        else:
+            try:
+                a = await client.send_message(
+                    chat_id=message.chat.id,
+                    text=Presets.NO_MEDIA.format(query_message),
+                    reply_to_message_id=message.message_id,
+                )
+                time.sleep(3)
+                await a.delete()
+            except Exception:
+                pass
