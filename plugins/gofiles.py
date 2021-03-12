@@ -27,6 +27,7 @@ async def query_mgs(client: Bot, message: Message):
     if len(message.text) > 2:
         try:
             for channel in Config.CHANNELS:
+                # Looking for Document type in messages
                 async for messages in client.USER.search_messages(channel, query_message, filter="document"):
                     doc_file_names = messages.document.file_name
                     file_size = size(messages.document.file_size)
@@ -64,6 +65,7 @@ async def query_mgs(client: Bot, message: Message):
                             )
                         except FloodWait as e:
                             time.sleep(e.x)
+                # Looking for video type in messages
                 async for messages in client.USER.search_messages(channel, query_message, filter="video"):
                     vid_file_names = messages.caption
                     file_size = size(messages.video.file_size)
