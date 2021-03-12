@@ -89,7 +89,7 @@ async def query_mgs(client: Bot, message: Message):
                                 reply_markup=InlineKeyboardMarkup(
                                     [
                                         [InlineKeyboardButton(
-                                            "START BOT", url="t.me/{}?start={}".format(info.username, secret_query))
+                                            "👉 START BOT 👈", url="t.me/{}?start={}".format(info.username, secret_query))
                                          ]
                                     ])
                             )
@@ -110,7 +110,13 @@ async def query_mgs(client: Bot, message: Message):
                 await client.send_message(
                     chat_id=message.chat.id,
                     text=Presets.PM_ERROR,
-                    reply_to_message_id=message.message_id
+                    reply_to_message_id=message.message_id,
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [InlineKeyboardButton(
+                                "👉 START BOT 👈", url="t.me/{}".format(info.username))
+                             ]
+                        ])
                 )
             except Exception:
                 pass
