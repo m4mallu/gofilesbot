@@ -49,42 +49,45 @@ async def bot_pm(client: Bot, message: Message):
         text=Presets.WELCOME_TEXT.format(message.from_user.first_name)
     )
     if secret_query:
-        for channel in Config.CHANNELS:
-            async for messages in client.USER.search_messages(channel, secret_query, filter="document"):
-                doc_file_names = messages.document.file_name
-                file_size = size(messages.document.file_size)
-                if re.search(rf'\b{secret_query}\b', doc_file_names, re.IGNORECASE):
-                    media_name = messages.document.file_name.rsplit('.', 1)[0]
-                    media_format = messages.document.file_name.split('.')[-1]
-                    await client.send_chat_action(
-                        chat_id=message.from_user.id,
-                        action="upload_document"
-                    )
-                    try:
-                        await client.copy_message(
-                            chat_id=message.chat.id,
-                            from_chat_id=messages.chat.id,
-                            message_id=messages.message_id,
-                            caption=Config.GROUP_U_NAME+Presets.CAPTION_TEXT_DOC.format(media_name,
-                                                                                        media_format, file_size)
+        try:
+            for channel in Config.CHANNELS:
+                async for messages in client.USER.search_messages(channel, secret_query, filter="document"):
+                    doc_file_names = messages.document.file_name
+                    file_size = size(messages.document.file_size)
+                    if re.search(rf'\b{secret_query}\b', doc_file_names, re.IGNORECASE):
+                        media_name = messages.document.file_name.rsplit('.', 1)[0]
+                        media_format = messages.document.file_name.split('.')[-1]
+                        await client.send_chat_action(
+                            chat_id=message.from_user.id,
+                            action="upload_document"
                         )
-                    except FloodWait as e:
-                        time.sleep(e.x)
-            async for messages in client.USER.search_messages(channel, secret_query, filter="video"):
-                vid_file_names = messages.caption
-                file_size = size(messages.video.file_size)
-                if re.search(rf'\b{secret_query}\b', vid_file_names, re.IGNORECASE):
-                    media_name = secret_query.upper()
-                    await client.send_chat_action(
-                        chat_id=message.from_user.id,
-                        action="upload_video"
-                    )
-                    try:
-                        await client.copy_message(
-                            chat_id=message.chat.id,
-                            from_chat_id=messages.chat.id,
-                            message_id=messages.message_id,
-                            caption=Config.GROUP_U_NAME+Presets.CAPTION_TEXT_VID.format(media_name, file_size)
+                        try:
+                            await client.copy_message(
+                                chat_id=message.chat.id,
+                                from_chat_id=messages.chat.id,
+                                message_id=messages.message_id,
+                                caption=Config.GROUP_U_NAME+Presets.CAPTION_TEXT_DOC.format(media_name,
+                                                                                            media_format, file_size)
+                            )
+                        except FloodWait as e:
+                            time.sleep(e.x)
+                async for messages in client.USER.search_messages(channel, secret_query, filter="video"):
+                    vid_file_names = messages.caption
+                    file_size = size(messages.video.file_size)
+                    if re.search(rf'\b{secret_query}\b', vid_file_names, re.IGNORECASE):
+                        media_name = secret_query.upper()
+                        await client.send_chat_action(
+                            chat_id=message.from_user.id,
+                            action="upload_video"
                         )
-                    except FloodWait as e:
-                        time.sleep(e.x)
+                        try:
+                            await client.copy_message(
+                                chat_id=message.chat.id,
+                                from_chat_id=messages.chat.id,
+                                message_id=messages.message_id,
+                                caption=Config.GROUP_U_NAME+Presets.CAPTION_TEXT_VID.format(media_name, file_size)
+                            )
+                        except FloodWait as e:
+                            time.sleep(e.x)
+        except Exception:
+            return
