@@ -18,6 +18,7 @@ API_HASH        - Get from my.telegram.org
 TG_USER_SESSION - Run any userbot session maker(https://repl.it/@ayrahikari/pyrogram-session-maker)
 CHANNELS        - List of Channel ids (Starts with -100) seperated by <space>
 AUTH_USERS      - List of Autherized user ids separated by <space>
+GROUP_U_NAME    - Username of the group to tag in sending medias
 ```
 ⚠️ **TG_USER_SESSION Must be  made from an admin User present in the Group & channels** ⚠️
 
@@ -57,6 +58,9 @@ class Config(object):
     TG_USER_SESSION = "BQDGRUC0_qw2GVQ2gpLFaXOt0mrWg16cBZPATQvR8KThDzi-NRE1I9DB......"
     CHANNELS = [-10012233245, -100883635533]
     AUTH_USERS = [1134455567, 9244566948]
+    
+# ------------- Optional ------------- #
+    GROUP_U_NAME = "@my_group_name"
 
 ```
 Run the following:
