@@ -44,12 +44,12 @@ async def bot_pm(client: Bot, message: Message):
         except Exception:
             pass
         return
-    await client.send_message(
-        chat_id=message.chat.id,
-        text=Presets.WELCOME_TEXT.format(message.from_user.first_name)
-    )
-    if secret_query:
-        try:
+    try:
+        await client.send_message(
+            chat_id=message.chat.id,
+            text=Presets.WELCOME_TEXT.format(message.from_user.first_name)
+        )
+        if secret_query:
             for channel in Config.CHANNELS:
                 # Looking for Document type in messages
                 async for messages in client.USER.search_messages(channel, secret_query, filter="document"):
@@ -91,5 +91,5 @@ async def bot_pm(client: Bot, message: Message):
                             )
                         except FloodWait as e:
                             time.sleep(e.x)
-        except Exception:
-            return
+    except Exception:
+        return

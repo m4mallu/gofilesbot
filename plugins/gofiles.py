@@ -139,12 +139,10 @@ async def query_mgs(client: Bot, message: Message):
                 pass
         else:
             try:
-                a = await client.send_message(
+                await client.send_message(
                     chat_id=message.chat.id,
                     text=Presets.NO_MEDIA.format(query_message),
                     reply_to_message_id=message.message_id,
                 )
-                time.sleep(3)
-                await a.delete()
             except Exception:
                 pass
