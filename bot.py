@@ -25,7 +25,7 @@ class Bot(Client):
             plugins={
                 "root": "plugins"
             },
-            workers=50
+            workers=4
         )
         self.LOGGER = LOGGER
 
