@@ -8,7 +8,7 @@ class Presets(object):
                   "ബോട്ട് സ്റ്റാർട്ട് ചെയ്യേണ്ടതാണ്. "
     WELCOME_TEXT = "Hello.. <b>{}</b>\n<code>I can help you getting movies from</code> @MovieKeralam. " \
                    "<code>Just Keep this message live Here</code>😉\n\n<b>My Author is: " \
-                   "</b><a href='https://t.me/space4renjith'>                HERE</a>\n" \
+                   "</b><a href='https://t.me/space4renjith'>                 HERE</a>\n" \
                    "<b>My code can be seen: </b><a href='https://github.com/m4mallu/gofilesbot'> HERE</a>"
     CLEAN_CHAT_MSG = "⚠️ <b>Deleting all messages..</b>"
     MSG_FOR_PIN = "<b>For getting medias from here..</b>\n\n🔛 <code>Please start</code> @{} <code>in PM\n\n♻️ " \
