@@ -33,7 +33,7 @@ async def query_mgs(client: Bot, message: Message):
                 async for messages in client.USER.search_messages(channel, query_message, filter="document"):
                     doc_file_names = messages.document.file_name
                     file_size = size(messages.document.file_size)
-                    if re.search(rf'\b{query_message}\b', doc_file_names, re.IGNORECASE):
+                    if re.compile(rf'{doc_file_names}', re.IGNORECASE):
                         try:
                             await client.send_chat_action(
                                 chat_id=message.from_user.id,
@@ -72,7 +72,7 @@ async def query_mgs(client: Bot, message: Message):
                 async for messages in client.USER.search_messages(channel, query_message, filter="video"):
                     vid_file_names = messages.caption
                     file_size = size(messages.video.file_size)
-                    if re.search(rf'\b{query_message}\b', vid_file_names, re.IGNORECASE):
+                    if re.compile(rf'{vid_file_names}', re.IGNORECASE):
                         try:
                             await client.send_chat_action(
                                 chat_id=message.from_user.id,

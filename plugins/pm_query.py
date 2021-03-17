@@ -57,7 +57,7 @@ async def bot_pm(client: Bot, message: Message):
                 async for messages in client.USER.search_messages(channel, secret_query, filter="document"):
                     doc_file_names = messages.document.file_name
                     file_size = size(messages.document.file_size)
-                    if re.search(rf'\b{secret_query}\b', doc_file_names, re.IGNORECASE):
+                    if re.compile(rf'{doc_file_names}', re.IGNORECASE):
                         media_name = messages.document.file_name.rsplit('.', 1)[0]
                         media_format = messages.document.file_name.split('.')[-1]
                         await client.send_chat_action(
@@ -78,7 +78,7 @@ async def bot_pm(client: Bot, message: Message):
                 async for messages in client.USER.search_messages(channel, secret_query, filter="video"):
                     vid_file_names = messages.caption
                     file_size = size(messages.video.file_size)
-                    if re.search(rf'\b{secret_query}\b', vid_file_names, re.IGNORECASE):
+                    if re.compile(rf'{vid_file_names}', re.IGNORECASE):
                         media_name = secret_query.upper()
                         await client.send_chat_action(
                             chat_id=message.from_user.id,
