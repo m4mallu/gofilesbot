@@ -49,7 +49,9 @@ async def bot_pm(client: Bot, message: Message):
     try:
         await client.send_message(
             chat_id=message.chat.id,
-            text=Presets.WELCOME_TEXT.format(message.from_user.first_name)
+            text=Presets.WELCOME_TEXT.format(message.from_user.first_name),
+            parse_mode='html',
+            disable_web_page_preview=True
         )
         if secret_query:
             for channel in Config.CHANNELS:
