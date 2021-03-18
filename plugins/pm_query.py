@@ -56,7 +56,7 @@ async def bot_pm(client: Bot, message: Message):
         if secret_query:
             for channel in Config.CHANNELS:
                 # Looking for Document type in messages
-                async for messages in client.USER.search_messages(channel, secret_query, filter="document"):
+                async for messages in client.USER.search_messages(channel, secret_query, filter="document", limit=50):
                     doc_file_names = messages.document.file_name
                     file_size = size(messages.document.file_size)
                     if re.compile(rf'{doc_file_names}', re.IGNORECASE):
@@ -77,7 +77,7 @@ async def bot_pm(client: Bot, message: Message):
                         except FloodWait as e:
                             time.sleep(e.x)
                 # Looking for video type in messages
-                async for messages in client.USER.search_messages(channel, secret_query, filter="video"):
+                async for messages in client.USER.search_messages(channel, secret_query, filter="video", limit=50):
                     vid_file_names = messages.caption
                     file_size = size(messages.video.file_size)
                     if re.compile(rf'{vid_file_names}', re.IGNORECASE):
