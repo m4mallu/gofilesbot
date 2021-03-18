@@ -23,6 +23,6 @@ class Presets(object):
     PM_ERROR = "<b>Unable to send medias</b> ⛔️\n<code>As you have Blocked or Deleted the Bot chat !\nKeep unblock " \
                "or Start the bot, then ask here for movies !</code>"
     MEDIA_SEND_TEXT = "<code>Media dispatched as PM 🥳</code>"
-    NO_MEDIA = "Requested movie: <b>{}</b>\n<code>Not available Right Now.\nMake sure your message:\n⭕️ Having " \
-               "movie name only\n⭕️ Spelled correctly\n⭕️ Don't have unwanted texts\n⭕ Not asking theatre prints" \
+    NO_MEDIA = "Requested movie: <b>{}</b>\n<code>Not available Right Now.\nPossible Causes :\n⭕️ Not " \
+               "released yet\n⭕️ Spelled incorrectly\n⭕️ Unwanted texts in Msgs\n⭕ Asking theatre prints" \
                "</code>"
