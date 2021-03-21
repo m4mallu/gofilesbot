@@ -21,11 +21,16 @@ else:
 
 @Client.on_message(filters.group & filters.text)
 async def query_mgs(client: Bot, message: Message):
+    query_message = message.text
+    block_list = Presets.BLOCK_LIST
+
     if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
         return
-    query_message = message.text
+    if query_message.startswith(tuple(block_list)):
+        return
     info = await client.get_me()
     user_message.clear()
+
     if len(message.text) > 2:
         try:
             for channel in Config.CHANNELS:
@@ -138,11 +143,14 @@ async def query_mgs(client: Bot, message: Message):
             except Exception:
                 pass
         else:
+            updated_query = query_message.replace(" ", "+")
             try:
                 await client.send_message(
                     chat_id=message.chat.id,
-                    text=Presets.NO_MEDIA.format(query_message),
+                    text=Presets.NO_MEDIA.format(query_message, updated_query),
                     reply_to_message_id=message.message_id,
+                    parse_mode='html',
+                    disable_web_page_preview=True
                 )
             except Exception:
                 pass
