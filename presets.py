@@ -26,5 +26,5 @@ class Presets(object):
     NO_MEDIA = "Requested movie: <b>{}</b>\n\n<b>Not available " \
                "Right Now</b>\n<code>Possible Causes : 🤔\n\n⭕️ Not " \
                "released yet</code>\n⭕️ <a href='https://www.google.com/search?q={}'> Spelled incorrectly</a>\n" \
-               "<code>⭕️ Unwanted texts in Msgs\n⭕ Asking theatre prints</code>"
+               "<code>⭕️ Unwanted texts in Msgs\n⭕ Asking theatre prints\n⭕ Not in ma Database</code>"
     BLOCK_LIST = ['http://', 'https://', '@', '#', 'bit.ly', 't.me']
