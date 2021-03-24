@@ -7,7 +7,6 @@ import time
 from bot import Bot
 from presets import Presets
 from base64 import b64decode
-from hurry.filesize import size
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait
 from pyrogram import Client, filters
