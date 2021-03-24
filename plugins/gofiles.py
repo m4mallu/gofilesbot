@@ -35,7 +35,7 @@ async def query_mgs(client: Bot, message: Message):
                 # Looking for Document type in messages
                 async for messages in client.USER.search_messages(channel, query_message, filter="document", limit=50):
                     doc_file_names = messages.document.file_name
-                    file_size = size(messages.document.file_size)
+                    file_size = get_size(messages.document.file_size)
                     if re.compile(rf'{doc_file_names}', re.IGNORECASE):
                         try:
                             await client.send_chat_action(
@@ -74,7 +74,7 @@ async def query_mgs(client: Bot, message: Message):
                 # Looking for video type in messages
                 async for messages in client.USER.search_messages(channel, query_message, filter="video", limit=50):
                     vid_file_names = messages.caption
-                    file_size = size(messages.video.file_size)
+                    file_size = get_size(messages.video.file_size)
                     if re.compile(rf'{vid_file_names}', re.IGNORECASE):
                         try:
                             await client.send_chat_action(
@@ -152,3 +152,14 @@ async def query_mgs(client: Bot, message: Message):
                 )
             except Exception:
                 pass
+
+def get_size(size):
+    """Get size in readable format"""
+
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
+    size = float(size)
+    i = 0
+    while size >= 1024.0 and i < len(units):
+        i += 1
+        size /= 1024.0
+    return "%.2f %s" % (size, units[i])
