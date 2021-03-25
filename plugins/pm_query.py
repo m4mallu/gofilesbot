@@ -7,7 +7,6 @@ import time
 from bot import Bot
 from presets import Presets
 from base64 import b64decode
-from hurry.filesize import size
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait
 from pyrogram import Client, filters
@@ -58,7 +57,7 @@ async def bot_pm(client: Bot, message: Message):
                 # Looking for Document type in messages
                 async for messages in client.USER.search_messages(channel, secret_query, filter="document", limit=50):
                     doc_file_names = messages.document.file_name
-                    file_size = size(messages.document.file_size)
+                    file_size = get_size(messages.document.file_size)
                     if re.compile(rf'{doc_file_names}', re.IGNORECASE):
                         media_name = messages.document.file_name.rsplit('.', 1)[0]
                         media_format = messages.document.file_name.split('.')[-1]
@@ -79,7 +78,7 @@ async def bot_pm(client: Bot, message: Message):
                 # Looking for video type in messages
                 async for messages in client.USER.search_messages(channel, secret_query, filter="video", limit=50):
                     vid_file_names = messages.caption
-                    file_size = size(messages.video.file_size)
+                    file_size = get_size(messages.video.file_size)
                     if re.compile(rf'{vid_file_names}', re.IGNORECASE):
                         media_name = secret_query.upper()
                         await client.send_chat_action(
@@ -97,3 +96,14 @@ async def bot_pm(client: Bot, message: Message):
                             time.sleep(e.x)
     except Exception:
         return
+
+def get_size(size):
+    """Get size in readable format"""
+
+    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
+    size = float(size)
+    i = 0
+    while size >= 1024.0 and i < len(units):
+        i += 1
+        size /= 1024.0
+    return "%.2f %s" % (size, units[i])
