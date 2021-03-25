@@ -7,6 +7,7 @@ import time
 from bot import Bot
 from presets import Presets
 from base64 import b64decode
+from helper.file_size import get_size
 from pyrogram.types import Message
 from pyrogram.errors import FloodWait
 from pyrogram import Client, filters
@@ -96,14 +97,3 @@ async def bot_pm(client: Bot, message: Message):
                             time.sleep(e.x)
     except Exception:
         return
-
-def get_size(size):
-    """Get size in readable format"""
-
-    units = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB"]
-    size = float(size)
-    i = 0
-    while size >= 1024.0 and i < len(units):
-        i += 1
-        size /= 1024.0
-    return "%.2f %s" % (size, units[i])
