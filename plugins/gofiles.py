@@ -53,7 +53,7 @@ async def query_mgs(client: Bot, message: Message):
                                 reply_markup=InlineKeyboardMarkup(
                                     [
                                         [InlineKeyboardButton(
-                                            "👉 START BOT 👈", url="t.me/{}?start={}".format(info.username, secret_query))
+                                            "👉 CLICK HERE 👈", url="t.me/{}?start={}".format(info.username, secret_query))
                                          ]
                                     ])
                             )
@@ -92,7 +92,7 @@ async def query_mgs(client: Bot, message: Message):
                                 reply_markup=InlineKeyboardMarkup(
                                     [
                                         [InlineKeyboardButton(
-                                            "👉 START BOT 👈", url="t.me/{}?start={}".format(info.username, secret_query))
+                                            "👉 CLICK HERE 👈", url="t.me/{}?start={}".format(info.username, secret_query))
                                          ]
                                     ])
                             )
