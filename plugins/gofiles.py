@@ -48,12 +48,12 @@ async def query_mgs(client: Bot, message: Message):
                             secret_query = base64_bytes.decode("ascii")
                             await client.send_message(
                                 chat_id=message.chat.id,
-                                text=Presets.ASK_PM_TEXT,
+                                text=Presets.ASK_PM_TEXT @request_moviesorseries
                                 reply_to_message_id=message.message_id,
                                 reply_markup=InlineKeyboardMarkup(
                                     [
                                         [InlineKeyboardButton(
-                                            "👉 CLICK HERE 👈", url="t.me/{}?start={}".format(info.username, secret_query))
+                                            "🔰 CLICK HERE🔰 ", url="t.me/{}?start={}".format(info.username, secret_query))
                                          ]
                                     ])
                             )
@@ -87,12 +87,12 @@ async def query_mgs(client: Bot, message: Message):
                             secret_query = base64_bytes.decode("ascii")
                             await client.send_message(
                                 chat_id=message.chat.id,
-                                text=Presets.ASK_PM_TEXT,
+                                text=Presets.ASK_PM_TEXT @request_moviesorseries,
                                 reply_to_message_id=message.message_id,
                                 reply_markup=InlineKeyboardMarkup(
                                     [
                                         [InlineKeyboardButton(
-                                            "👉 CLICK HERE 👈", url="t.me/{}?start={}".format(info.username, secret_query))
+                                            "🔰 CLICK HERE 🔰", url="t.me/{}?start={}".format(info.username, secret_query))
                                          ]
                                     ])
                             )
@@ -117,7 +117,7 @@ async def query_mgs(client: Bot, message: Message):
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [InlineKeyboardButton(
-                                "👉 START BOT 👈", url="t.me/{}".format(info.username))
+                                "🔰 START BOT 🔰", url="t.me/{}".format(info.username))
                              ]
                         ])
                 )
@@ -128,12 +128,12 @@ async def query_mgs(client: Bot, message: Message):
             try:
                 await client.send_message(
                     chat_id=message.chat.id,
-                    text=Presets.MEDIA_SEND_TEXT,
+                    text=Presets.MEDIA_SEND_TEXT @request_moviesorseries,
                     reply_to_message_id=user_message[id],
                     reply_markup=InlineKeyboardMarkup(
                         [
                             [InlineKeyboardButton(
-                                "👉 Click Here To View 👈", url="t.me/{}".format(info.username))
+                                "🔰Click Here To View 🔰", url="t.me/{}".format(info.username))
                              ]
                         ])
                 )
@@ -152,3 +152,4 @@ async def query_mgs(client: Bot, message: Message):
                 )
             except Exception:
                 pass
+ 
